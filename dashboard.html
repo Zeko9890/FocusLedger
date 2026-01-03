@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | FocusLedger</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+</head>
+<body class="dark-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <span class="brand-icon">📊</span>
+                <span class="brand-text">FocusLedger</span>
+            </div>
+            <button class="sidebar-close" aria-label="Close sidebar">
+                <img src="icons/close.svg" alt="Close" class="nav-icon">
+            </button>
+        </div>
+
+        <div class="sidebar-content">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <span id="user-initials">JD</span>
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">John Doe</h3>
+                    <p id="user-email">john@example.com</p>
+                </div>
+            </div>
+
+            <div class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-view="dashboard">
+                    <img src="icons/chart.svg" alt="Dashboard" class="nav-icon">
+                    <span>Dashboard</span>
+                </a>
+                <a href="#timer" class="nav-item" data-view="timer">
+                    <img src="icons/timer.svg" alt="Focus Timer" class="nav-icon">
+                    <span>Focus Timer</span>
+                </a>
+                <a href="#tasks" class="nav-item" data-view="tasks">
+                    <img src="icons/tasks.svg" alt="Tasks" class="nav-icon">
+                    <span>Tasks & Sessions</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-view="analytics">
+                    <img src="icons/chart.svg" alt="Analytics" class="nav-icon">
+                    <span>Analytics</span>
+                </a>
+                <a href="#settings" class="nav-item" data-view="settings">
+                    <img src="icons/settings.svg" alt="Settings" class="nav-icon">
+                    <span>Settings</span>
+                </a>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="theme-toggle">
+                    <span class="theme-icon">🌙</span>
+                    <span>Dark Mode</span>
+                </button>
+                <button id="logout-btn" class="btn-logout">
+                    <img src="icons/logout.svg" alt="Logout" class="nav-icon">
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" aria-label="Open sidebar">
+                    <img src="icons/menu.svg" alt="Menu" class="nav-icon">
+                </button>
+                <div class="current-date">
+                    <span id="current-date">Loading...</span>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <div class="quick-stats">
+                    <div class="quick-stat">
+                        <span class="stat-label">Today's Focus</span>
+                        <span class="stat-value" id="today-focus">0h 0m</span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="stat-label">Sessions</span>
+                        <span class="stat-value" id="today-sessions">0</span>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="user-menu-btn">
+                        <div class="user-avatar small">
+                            <span id="user-initials-top">JD</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view active">
+                <div class="view-header">
+                    <h1 class="view-title">Dashboard Overview</h1>
+                    <div class="view-actions">
+                        <button class="btn-secondary" id="export-data">Export Data</button>
+                        <button class="btn-primary" id="new-session">New Focus Session</button>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3 class="stat-title">Total Focus Time</h3>
+                            <span class="stat-trend positive">+12%</span>
+                        </div>
+                        <div class="stat-value-large" id="total-focus-time">0h 0m</div>
+                        <div class="stat-period">This Week</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3 class="stat-title">Average Session</h3>
+                            <span class="stat-trend neutral">±0%</span>
+                        </div>
+                        <div class="stat-value-large" id="avg-session">0m</div>
+                        <div class="stat-period">Last 7 days</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3 class="stat-title">Focus Efficiency</h3>
+                            <span class="stat-trend positive">+5%</span>
+                        </div>
+                        <div class="stat-value-large" id="focus-efficiency">0%</div>
+                        <div class="stat-period">Vs. last week</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3 class="stat-title">Tasks Completed</h3>
+                            <span class="stat-trend negative">-3%</span>
+                        </div>
+                        <div class="stat-value-large" id="tasks-completed">0</div>
+                        <div class="stat-period">This Week</div>
+                    </div>
+                </div>
+
+                <!-- Charts and Data -->
+                <div class="data-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Focus Trends</h3>
+                            <select class="chart-period" id="trend-period">
+                                <option value="week">Last 7 Days</option>
+                                <option value="month">Last 30 Days</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="focus-trend-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="sessions-card">
+                        <div class="sessions-header">
+                            <h3 class="sessions-title">Recent Sessions</h3>
+                            <button class="btn-text" id="view-all-sessions">View All</button>
+                        </div>
+                        <div class="sessions-list" id="recent-sessions">
+                            <div class="empty-state">
+                                <div class="empty-icon">⏱️</div>
+                                <h3>No sessions yet</h3>
+                                <p>Start your first focus session to see data here</p>
+                                <button class="btn-primary" id="start-first-session">Start First Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productivity Insights -->
+                <div class="insights-card">
+                    <div class="insights-header">
+                        <h3 class="insights-title">Productivity Insights</h3>
+                        <span class="insights-badge" id="insights-badge">Analyzing...</span>
+                    </div>
+                    <div class="insights-content" id="insights-content">
+                        <p>Complete your first focus session to receive personalized insights.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timer View -->
+            <div id="timer-view" class="view">
+                <div class="view-header">
+                    <h1 class="view-title">Focus Timer</h1>
+                    <div class="timer-actions">
+                        <button class="btn-secondary" id="reset-timer">Reset</button>
+                        <button class="btn-primary" id="save-session">Save Session</button>
+                    </div>
+                </div>
+
+                <div class="timer-container">
+                    <div class="timer-display">
+                        <div class="timer-time" id="timer-display">25:00</div>
+                        <div class="timer-mode" id="timer-mode">FOCUS</div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <button class="timer-btn primary" id="start-timer">
+                            <img src="icons/play.svg" alt="Start" class="btn-icon">
+                            <span>Start</span>
+                        </button>
+                        <button class="timer-btn secondary" id="pause-timer" disabled>
+                            <img src="icons/pause.svg" alt="Pause" class="btn-icon">
+                            <span>Pause</span>
+                        </button>
+                        <button class="timer-btn danger" id="stop-timer" disabled>
+                            <img src="icons/stop.svg" alt="Stop" class="btn-icon">
+                            <span>Stop</span>
+                        </button>
+                    </div>
+
+                    <div class="timer-settings">
+                        <div class="setting-group">
+                            <label for="focus-duration" class="setting-label">Focus Duration</label>
+                            <input type="range" id="focus-duration" min="5" max="90" value="25" class="slider">
+                            <div class="slider-value" id="focus-value">25 min</div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="break-duration" class="setting-label">Break Duration</label>
+                            <input type="range" id="break-duration" min="1" max="30" value="5" class="slider">
+                            <div class="slider-value" id="break-value">5 min</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-logging">
+                    <h3 class="section-title">Session Task</h3>
+                    <div class="task-input-group">
+                        <input type="text" 
+                               id="task-input" 
+                               class="task-input" 
+                               placeholder="What are you working on?">
+                        <button class="btn-primary" id="log-task">Log Task</button>
+                    </div>
+                    <div class="current-task" id="current-task-display">
+                        No task logged for this session
+                    </div>
+                </div>
+
+                <div class="distraction-logger">
+                    <h3 class="section-title">Distraction Log</h3>
+                    <div class="distraction-input-group">
+                        <input type="text" 
+                               id="distraction-input" 
+                               class="distraction-input" 
+                               placeholder="Note a distraction (e.g., 'Phone notification')">
+                        <button class="btn-secondary" id="log-distraction">Log</button>
+                    </div>
+                    <div class="distractions-list" id="distractions-list">
+                        <div class="empty-state small">
+                            No distractions logged yet
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks View -->
+            <div id="tasks-view" class="view">
+                <div class="view-header">
+                    <h1 class="view-title">Tasks & Sessions</h1>
+                    <div class="view-actions">
+                        <button class="btn-secondary" id="filter-tasks">Filter</button>
+                        <button class="btn-primary" id="new-task">New Task</button>
+                    </div>
+                </div>
+
+                <div class="tasks-container">
+                    <div class="tasks-sidebar">
+                        <div class="tasks-filters">
+                            <h4>Filters</h4>
+                            <div class="filter-group">
+                                <label class="checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Active Tasks
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Completed
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    This Week
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="tasks-summary">
+                            <h4>Summary</h4>
+                            <div class="summary-item">
+                                <span>Total Tasks</span>
+                                <span id="total-tasks">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Time Spent</span>
+                                <span id="total-task-time">0h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tasks-main">
+                        <div class="tasks-header">
+                            <h2>Your Tasks</h2>
+                            <div class="tasks-search">
+                                <input type="text" 
+                                       id="tasks-search" 
+                                       class="search-input" 
+                                       placeholder="Search tasks...">
+                            </div>
+                        </div>
+
+                        <div class="tasks-list" id="tasks-list">
+                            <div class="empty-state">
+                                <div class="empty-icon">📝</div>
+                                <h3>No tasks yet</h3>
+                                <p>Create your first task to start tracking</p>
+                                <button class="btn-primary" id="create-first-task">Create Task</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics View -->
+            <div id="analytics-view" class="view">
+                <div class="view-header">
+                    <h1 class="view-title">Advanced Analytics</h1>
+                    <div class="view-actions">
+                        <select class="analytics-period" id="analytics-period">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="analytics-chart large">
+                        <div class="chart-header">
+                            <h3>Focus Distribution by Task</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="task-distribution-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-chart">
+                        <div class="chart-header">
+                            <h3>Daily Patterns</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="daily-patterns-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-chart">
+                        <div class="chart-header">
+                            <h3>Efficiency Over Time</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="efficiency-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-insights">
+                    <h3>Detailed Insights</h3>
+                    <div class="insights-grid" id="detailed-insights">
+                        <div class="insight-card">
+                            <h4>Peak Productivity Hours</h4>
+                            <p>Your most productive time is between 10:00 AM and 12:00 PM</p>
+                        </div>
+                        <div class="insight-card">
+                            <h4>Common Distractions</h4>
+                            <p>Email notifications account for 40% of logged distractions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view">
+                <div class="view-header">
+                    <h1 class="view-title">Settings</h1>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-sidebar">
+                        <button class="settings-tab active" data-tab="profile">Profile</button>
+                        <button class="settings-tab" data-tab="notifications">Notifications</button>
+                        <button class="settings-tab" data-tab="privacy">Privacy</button>
+                        <button class="settings-tab" data-tab="integrations">Integrations</button>
+                    </div>
+
+                    <div class="settings-content">
+                        <div id="profile-settings" class="settings-panel active">
+                            <h3>Profile Settings</h3>
+                            <form id="profile-form" class="settings-form">
+                                <div class="form-group">
+                                    <label>Profile Picture</label>
+                                    <div class="avatar-upload">
+                                        <div class="avatar-preview" id="avatar-preview">
+                                            <span id="avatar-initials">JD</span>
+                                        </div>
+                                        <button type="button" class="btn-secondary">Change</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="settings-name">Full Name</label>
+                                    <input type="text" id="settings-name" class="form-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="settings-email">Email</label>
+                                    <input type="email" id="settings-email" class="form-input" disabled>
+                                </div>
+
+                                <button type="submit" class="btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden">
+        <div class="loading-spinner large"></div>
+        <p class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Modals -->
+    <div id="new-task-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Task</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="new-task-form">
+                    <div class="form-group">
+                        <label for="task-title">Task Title</label>
+                        <input type="text" id="task-title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-project">Project/Category</label>
+                        <input type="text" id="task-project" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="task-notes">Notes</label>
+                        <textarea id="task-notes" class="form-textarea" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary modal-close">Cancel</button>
+                        <button type="submit" class="btn-primary">Create Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="session-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Session Complete!</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="session-summary">
+                    <div class="summary-item">
+                        <span>Duration:</span>
+                        <span id="session-duration">25:00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Task:</span>
+                        <span id="session-task">No task logged</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Distractions:</span>
+                        <span id="session-distractions">0</span>
+                    </div>
+                </div>
+                <form id="session-notes-form">
+                    <div class="form-group">
+                        <label for="session-notes">Session Notes (Optional)</label>
+                        <textarea id="session-notes" class="form-textarea" rows="3" placeholder="How did the session go? Any insights?"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Save Session</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/timer.js"></script>
+</body>
+</html>

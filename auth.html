@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>FocusLedger | Sign In</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+
+    <!-- Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link
+        rel="icon"
+        href="data:image/svg+xml,
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+            <text y='0.9em' font-size='90'>📊</text>
+        </svg>"
+    />
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <a href="index.html" class="back-link">
+                <span class="back-arrow">←</span>
+                Back to Home
+            </a>
+
+            <div class="auth-brand">
+                <span class="brand-icon">📊</span>
+                <span class="brand-text">FocusLedger</span>
+            </div>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Sign In</button>
+                <button class="auth-tab" data-tab="signup">Create Account</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="login-form" class="auth-form active">
+                <div class="form-header">
+                    <h2 class="form-title">Welcome Back</h2>
+                    <p class="form-subtitle">
+                        Sign in to your FocusLedger dashboard
+                    </p>
+                </div>
+
+                <form id="loginForm" class="form-content" novalidate>
+                    <div class="form-group">
+                        <label for="login-email" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="login-email"
+                            class="form-input"
+                            placeholder="you@company.com"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input
+                            type="password"
+                            id="login-password"
+                            class="form-input"
+                            placeholder="••••••••"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="remember-me" />
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">
+                        Sign In
+                    </button>
+
+                    <div class="form-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <button type="button" class="btn-google">
+                        <span class="google-icon">G</span>
+                        Google
+                    </button>
+                </form>
+            </div>
+
+            <!-- SIGNUP -->
+            <div id="signup-form" class="auth-form">
+                <div class="form-header">
+                    <h2 class="form-title">Create Account</h2>
+                    <p class="form-subtitle">
+                        Start your productivity journey
+                    </p>
+                </div>
+
+                <form id="signupForm" class="form-content" novalidate>
+                    <div class="form-group">
+                        <label for="signup-name" class="form-label">Full Name</label>
+                        <input
+                            type="text"
+                            id="signup-name"
+                            class="form-input"
+                            placeholder="John Doe"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="signup-email"
+                            class="form-input"
+                            placeholder="you@company.com"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password" class="form-label">Password</label>
+                        <input
+                            type="password"
+                            id="signup-password"
+                            class="form-input"
+                            placeholder="••••••••"
+                            required
+                        />
+                        <div class="password-hint">
+                            Minimum 8 characters with letters and numbers
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-confirm" class="form-label">
+                            Confirm Password
+                        </label>
+                        <input
+                            type="password"
+                            id="signup-confirm"
+                            class="form-input"
+                            placeholder="••••••••"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-agreement">
+                        <label class="checkbox">
+                            <input type="checkbox" id="terms" required />
+                            <span class="checkmark"></span>
+                            I agree to the
+                            <a href="#" class="link">Terms of Service</a>
+                            and
+                            <a href="#" class="link">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">
+                        Create Account
+                    </button>
+                </form>
+            </div>
+
+            <div class="auth-footer">
+                <p>
+                    By continuing, you agree to our
+                    <a href="#" class="link">Terms</a> and
+                    <a href="#" class="link">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="auth-loading hidden">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Authenticating...</p>
+        </div>
+    </div>
+
+    <!-- 🔑 SUPABASE CONFIG -->
+    <script>
+        window.SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
+        window.SUPABASE_ANON_KEY = "YOUR_PUBLIC_ANON_KEY";
+    </script>
+
+    <!-- Scripts -->
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
