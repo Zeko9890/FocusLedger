@@ -4,403 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FocusLedger | Productivity Analytics</title>
-    
-    <!-- INLINE STYLES - WORKING VERSION -->
-    <style>
-        /* CSS Variables */
-        :root {
-            --color-bg-primary: #ffffff;
-            --color-bg-secondary: #f8fafc;
-            --color-bg-tertiary: #f1f5f9;
-            --color-text-primary: #0f172a;
-            --color-text-secondary: #475569;
-            --color-text-tertiary: #64748b;
-            --color-border: #e2e8f0;
-            --color-accent: #3b82f6;
-            --color-accent-hover: #2563eb;
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-error: #ef4444;
-            --color-surface: #ffffff;
-            --color-overlay: rgba(15, 23, 42, 0.5);
-            
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            
-            --font-family: 'Inter', sans-serif;
-            --font-size-sm: 0.875rem;
-            --font-size-md: 1rem;
-            --font-size-lg: 1.125rem;
-            --font-size-xl: 1.25rem;
-            --font-size-2xl: 1.5rem;
-            --font-size-3xl: 1.875rem;
-            --font-size-4xl: 2.25rem;
-            
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-full: 9999px;
-            
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-theme {
-            --color-bg-primary: #0f172a;
-            --color-bg-secondary: #1e293b;
-            --color-bg-tertiary: #334155;
-            --color-text-primary: #f1f5f9;
-            --color-text-secondary: #cbd5e1;
-            --color-text-tertiary: #94a3b8;
-            --color-border: #475569;
-            --color-accent: #60a5fa;
-            --color-accent-hover: #3b82f6;
-            --color-success: #34d399;
-            --color-warning: #fbbf24;
-            --color-error: #f87171;
-            --color-surface: #1e293b;
-        }
-
-        /* Reset & Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: var(--font-family);
-            color: var(--color-text-primary);
-            background: var(--color-bg-primary);
-            line-height: 1.5;
-            transition: all 0.3s ease;
-        }
-
-        /* Navbar */
-        .navbar {
-            background: var(--color-surface);
-            border-bottom: 1px solid var(--color-border);
-            padding: 1rem 2rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            font-size: 1.25rem;
-        }
-
-        .brand-icon {
-            font-size: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--color-accent);
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            font-size: 0.875rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--color-accent);
-            color: white;
-            border: 1px solid var(--color-accent);
-        }
-
-        .btn-primary:hover {
-            background: var(--color-accent-hover);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-text-primary);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-bg-tertiary);
-        }
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-        }
-
-        /* Hero Section */
-        .main-content {
-            margin-top: 80px;
-            padding: 4rem 2rem;
-        }
-
-        .hero-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .dashboard-preview {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .preview-header {
-            background: var(--color-bg-tertiary);
-            padding: 1rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .preview-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .preview-dot.red { background: #ef4444; }
-        .preview-dot.yellow { background: #f59e0b; }
-        .preview-dot.green { background: #10b981; }
-
-        .preview-content {
-            padding: 2rem;
-        }
-
-        .preview-chart {
-            height: 200px;
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 100%);
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .preview-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .preview-stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            display: block;
-            color: var(--color-accent);
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--color-text-tertiary);
-            display: block;
-        }
-
-        /* Features */
-        .features-section {
-            max-width: 1200px;
-            margin: 8rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--color-text-secondary);
-            font-size: 1.125rem;
-            margin-bottom: 4rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 1rem;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--color-accent);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-description {
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--color-surface);
-            border-top: 1px solid var(--color-border);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            font-size: 1.25rem;
-        }
-
-        .footer-tagline {
-            color: var(--color-text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-link {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-        }
-
-        .footer-link:hover {
-            color: var(--color-accent);
-        }
-
-        .footer-copyright {
-            color: var(--color-text-tertiary);
-            font-size: 0.875rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
 </head>
-<body class="dark-theme">
+<body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -413,38 +23,40 @@
                 <a href="auth.html" class="nav-link btn-primary">Get Started</a>
             </div>
             <button class="nav-toggle" aria-label="Menu">
-                ☰
+                <img src="icons/menu.svg" alt="Menu" class="nav-icon">
             </button>
         </div>
     </nav>
 
     <main class="main-content">
         <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Track. Focus. <span class="gradient-text">Excel.</span></h1>
-                <p class="hero-subtitle">Professional focus analytics for peak productivity. Understand your work patterns, eliminate distractions, and achieve more.</p>
-                <div class="hero-actions">
-                    <a href="auth.html" class="btn-primary btn-large">Start Free Trial</a>
-                    <a href="#demo" class="btn-secondary btn-large">Watch Demo</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="dashboard-preview">
-                    <div class="preview-header">
-                        <div class="preview-dot red"></div>
-                        <div class="preview-dot yellow"></div>
-                        <div class="preview-dot green"></div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Track. Focus. <span class="gradient-text">Excel.</span></h1>
+                    <p class="hero-subtitle">Professional focus analytics for peak productivity. Understand your work patterns, eliminate distractions, and achieve more.</p>
+                    <div class="hero-actions">
+                        <a href="auth.html" class="btn-primary btn-large">Start Free Trial</a>
+                        <a href="#demo" class="btn-secondary btn-large">Watch Demo</a>
                     </div>
-                    <div class="preview-content">
-                        <div class="preview-chart"></div>
-                        <div class="preview-stats">
-                            <div class="preview-stat">
-                                <span class="stat-value">4.2h</span>
-                                <span class="stat-label">Today's Focus</span>
-                            </div>
-                            <div class="preview-stat">
-                                <span class="stat-value">92%</span>
-                                <span class="stat-label">Efficiency</span>
+                </div>
+                <div class="hero-visual">
+                    <div class="dashboard-preview">
+                        <div class="preview-header">
+                            <div class="preview-dot red"></div>
+                            <div class="preview-dot yellow"></div>
+                            <div class="preview-dot green"></div>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-chart"></div>
+                            <div class="preview-stats">
+                                <div class="preview-stat">
+                                    <span class="stat-value">4.2h</span>
+                                    <span class="stat-label">Today's Focus</span>
+                                </div>
+                                <div class="preview-stat">
+                                    <span class="stat-value">92%</span>
+                                    <span class="stat-label">Efficiency</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -500,39 +112,6 @@
         </div>
     </footer>
 
-    <!-- Simple JavaScript -->
-    <script>
-        // Dark/light mode toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const navToggle = document.querySelector('.nav-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            
-            if (navToggle) {
-                navToggle.addEventListener('click', function() {
-                    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-                });
-            }
-            
-            // Check if running on local file system
-            if (window.location.protocol === 'file:') {
-                console.log('Running from file system - CSS should work now');
-            }
-            
-            // Fix auth.html path if needed
-            const authLinks = document.querySelectorAll('a[href="auth.html"]');
-            authLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (window.location.protocol === 'file:') {
-                        // For local file system, ensure path is correct
-                        if (!window.location.href.includes('auth.html')) {
-                            window.location.href = 'auth.html';
-                            e.preventDefault();
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
