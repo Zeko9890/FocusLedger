@@ -265,8 +265,26 @@ a:hover {
     color: white;
 }
 
-/* Focus Styles */
-:focus-visible {
+/* Focus Styles (safe across browsers) */
+:focus {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+}
+
+/* Firefox-specific better focus */
+:-moz-focusring {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Modern browsers only */
+@supports selector(:focus-visible) {
+    :focus {
+        outline: none;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
 }
